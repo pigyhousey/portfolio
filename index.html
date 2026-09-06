@@ -1,0 +1,333 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>朱嘉 Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap">
+<style>
+:root {
+  --bg:         #f4f6fb;
+  --surface:    #ffffff;
+  --border:     #e3e8f2;
+  --text:       #0e1621;
+  --sub:        #3c4d62;
+  --muted:      #6b7e96;
+  --accent:     #1a3fa3;
+  --accent-mid: #2d5be3;
+  --accent-bg:  #edf2ff;
+  --accent-bd:  #c5d5f7;
+  --card-bd:    rgba(26,63,163,.28);
+  --font: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:         #0b1220;
+    --surface:    #111c30;
+    --border:     #1c2d45;
+    --text:       #dde6f4;
+    --sub:        #8aa0bc;
+    --muted:      #4a6180;
+    --accent:     #4d78f0;
+    --accent-mid: #7aa3ff;
+    --accent-bg:  #0d1d3c;
+    --accent-bd:  #1b3468;
+    --card-bd:    rgba(77,120,240,.38);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:         #0b1220;
+  --surface:    #111c30;
+  --border:     #1c2d45;
+  --text:       #dde6f4;
+  --sub:        #8aa0bc;
+  --muted:      #4a6180;
+  --accent:     #4d78f0;
+  --accent-mid: #7aa3ff;
+  --accent-bg:  #0d1d3c;
+  --accent-bd:  #1b3468;
+  --card-bd:    rgba(77,120,240,.38);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 60px 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Header ── */
+.cover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* top-align: PORTFOLIO top matches char top */
+  margin-bottom: 28px;
+}
+.header-left {
+  display: flex;
+  align-items: flex-end; /* everything bottom-aligns */
+  gap: 22px;
+}
+/* Two character columns: 朱 / ZHU and 嘉 / JIA */
+.name-chars {
+  display: flex;
+  gap: 16px;
+}
+.char-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.char-zh {
+  font-size: 50px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+.char-py {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.hd-vline {
+  width: 2px;
+  height: 50px;   /* spans only the character height */
+  background: var(--accent);
+  flex-shrink: 0;
+  opacity: .7;
+  margin-bottom: 20px; /* offset = pinyin height, aligns divider with char baseline */
+}
+.name-tag {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .01em;
+  margin-bottom: 20px; /* same offset, aligns text bottom with char baseline */
+}
+.portfolio-word {
+  font-size: 58px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -.025em;
+  line-height: 1;
+  margin-top: -7px; /* compensate Latin cap-height top whitespace vs CJK em-fill */
+}
+
+/* ── Subtitle ── */
+.subtitle {
+  font-size: 16px;
+  color: var(--sub);
+  margin-bottom: 44px;
+  line-height: 1.7;
+}
+
+/* ── Content area (flex column, enables order swap on mobile) ── */
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Cards grid ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.p-card {
+  background: var(--surface);
+  border: 1.5px solid var(--card-bd);
+  border-radius: 8px;
+  padding: 28px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color .2s, box-shadow .2s;
+}
+.p-card:hover {
+  border-color: var(--accent-mid);
+  box-shadow: 0 4px 20px rgba(26,63,163,.1);
+}
+.card-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.card-type {
+  font-size: 13px;
+  color: var(--accent-mid);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.card-desc {
+  font-size: 15px;
+  color: var(--sub);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 28px;
+}
+
+/* ── Card buttons ── */
+.card-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap; /* enforce single row on desktop */
+  margin-top: auto;
+}
+.cbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 9px 18px;
+  transition: opacity .15s, transform .1s, background .15s;
+  white-space: nowrap;
+}
+.cbtn:hover { opacity: .85; transform: translateY(-1px); }
+.cbtn:active { transform: translateY(0); }
+.cbtn-outline {
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+.cbtn-fill {
+  border: 1.5px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.cbtn-ghost {
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  background: transparent;
+}
+
+/* ── Closing sentence ── */
+.closing {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .page { padding: 36px 20px 48px; }
+
+  /* Header: stack name block and PORTFOLIO */
+  .cover-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .char-zh { font-size: 36px; }
+  .char-py { font-size: 10px; }
+  .hd-vline { height: 38px; margin-bottom: 16px; }
+  .name-tag { font-size: 16px; margin-bottom: 16px; }
+  .portfolio-word { font-size: 36px; align-self: flex-end; margin-top: 0; }
+
+  .subtitle { font-size: 15px; margin-bottom: 32px; }
+
+  /* Cards: single column, buttons allowed to wrap */
+  .cards-grid { grid-template-columns: 1fr; gap: 16px; }
+  .card-btns { flex-wrap: wrap; }
+
+  /* Closing sentence moves ABOVE cards */
+  .closing {
+    order: -1;
+    border-top: none;
+    border-bottom: 1px solid var(--border);
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+
+  .card-title { font-size: 17px; }
+  .cbtn { font-size: 13px; padding: 8px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header class="cover-header">
+    <div class="header-left">
+      <div class="name-chars">
+        <div class="char-col">
+          <div class="char-zh">朱</div>
+          <div class="char-py">ZHU</div>
+        </div>
+        <div class="char-col">
+          <div class="char-zh">嘉</div>
+          <div class="char-py">JIA</div>
+        </div>
+      </div>
+      <div class="hd-vline"></div>
+      <div class="name-tag">AI产品方向</div>
+    </div>
+    <div class="portfolio-word">PORTFOLIO</div>
+  </header>
+
+  <!-- ── Subtitle ── -->
+  <p class="subtitle">城市规划设计师转型，独立完成两个AI产品的0-1构建</p>
+
+  <!-- ── Content area ── -->
+  <div class="content-area">
+
+    <!-- Cards -->
+    <div class="cards-grid">
+
+      <!-- Card 1: 规划项目策划书Agent -->
+      <div class="p-card">
+        <div class="card-title">规划项目策划书Agent</div>
+        <div class="card-type">【垂类多步Agent】</div>
+        <div class="card-desc">三个关键取舍如何选的，以及实施后修正了哪些判断</div>
+        <div class="card-btns">
+          <a href="https://pigyhousey.github.io/portfolio/proposal-agent.html" target="_blank" rel="noopener" class="cbtn cbtn-outline">产品体验</a>
+          <a href="https://pigyhousey.github.io/portfolio/proposal-agent-document.html" target="_blank" rel="noopener" class="cbtn cbtn-fill">产品复盘</a>
+          <a href="https://docs.qq.com/pdf/DTkRoV3ppbUpaWnBB" target="_blank" rel="noopener" class="cbtn cbtn-ghost">查看完整文档</a>
+        </div>
+      </div>
+
+      <!-- Card 2: JobMate -->
+      <div class="p-card">
+        <div class="card-title">JobMate 求职辅助决策助手</div>
+        <div class="card-type">【LLM应用】</div>
+        <div class="card-desc">上线三个月后，用真实数据发现核心指标不成立，并据此迭代做了减法</div>
+        <div class="card-btns">
+          <a href="https://www.jobmate-better-match.com" target="_blank" rel="noopener" class="cbtn cbtn-outline">产品体验</a>
+          <a href="https://pigyhousey.github.io/portfolio/jobmate-document.html" target="_blank" rel="noopener" class="cbtn cbtn-fill">产品复盘</a>
+          <a href="https://docs.qq.com/pdf/DTmFTRE1tRGxsbmVR" target="_blank" rel="noopener" class="cbtn cbtn-ghost">查看完整文档</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Closing — moves above cards on mobile via order:-1 -->
+    <p class="closing">两个作品覆盖AI产品的两种主流形态（Agent &amp; LLM应用），两份复盘分别记录：做取舍的标准，用数据推翻自己的过程。</p>
+
+  </div>
+
+</div>
