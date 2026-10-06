@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3787e27d733b4f22ee66b2aa5efe2752";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>朱嘉 Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap">
+<style>
+:root {
+  --bg:         #f4f6fb;
+  --surface:    #ffffff;
+  --border:     #e3e8f2;
+  --text:       #0e1621;
+  --sub:        #3c4d62;
+  --muted:      #6b7e96;
+  --label:      #4b5563;
+  --accent:     #1a3fa3;
+  --accent-mid: #2d5be3;
+  --accent-bg:  #edf2ff;
+  --accent-bd:  #c5d5f7;
+  --card-bd:    rgba(26,63,163,.32);
+  --font: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:         #0b1220;
+    --surface:    #111c30;
+    --border:     #1c2d45;
+    --text:       #dde6f4;
+    --sub:        #8aa0bc;
+    --muted:      #4a6180;
+    --label:      #9aa6b8;
+    --accent:     #4d78f0;
+    --accent-mid: #7aa3ff;
+    --accent-bg:  #0d1d3c;
+    --accent-bd:  #1b3468;
+    --card-bd:    rgba(77,120,240,.42);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:         #0b1220;
+  --surface:    #111c30;
+  --border:     #1c2d45;
+  --text:       #dde6f4;
+  --sub:        #8aa0bc;
+  --muted:      #4a6180;
+  --label:      #9aa6b8;
+  --accent:     #4d78f0;
+  --accent-mid: #7aa3ff;
+  --accent-bg:  #0d1d3c;
+  --accent-bd:  #1b3468;
+  --card-bd:    rgba(77,120,240,.42);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+
+/* ── Top nav (fixed) ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 32px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 20px;
+  white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.nav-link:hover { color: var(--sub); border-color: var(--muted); }
+.nav-link.is-active {
+  background: var(--border);
+  border-color: var(--muted);
+  color: var(--text);
+}
+.nav-link:focus-visible,
+.btn:focus-visible,
+.cbtn:focus-visible,
+.top-btn:focus-visible,
+.email-pill:focus-visible { outline: 2px solid var(--accent-mid); outline-offset: 3px; }
+
+/* ── Page ── */
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 56px;
+}
+section[id] { scroll-margin-top: 72px; }
+
+/* ── Hero (第一屏，只放个人信息) ── */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 64px;
+  align-items: stretch;
+  align-content: center;
+  padding: 96px 0 40px;
+}
+.pill-tag {
+  position: relative;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin-bottom: 36px;
+}
+/* 呼吸光晕 */
+.pill-tag::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  border: 1.5px solid var(--accent-mid);
+  animation: breathe 2.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes breathe {
+  0%   { transform: scale(1);    opacity: .7; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+.name-zh {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: .3em;
+}
+.name-divider {
+  width: 2px;
+  height: 34px;
+  background: var(--accent);
+}
+.name-role {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+.hero-title {
+  font-size: 80px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: 28px;
+}
+.hero-bio {
+  font-size: 18px;
+  color: var(--sub);
+  line-height: 1.95;
+  margin-bottom: 40px;
+}
+.hero-bio strong { color: var(--text); font-weight: 700; }
+.hero-left { display: flex; flex-direction: column; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 32px;
+  text-decoration: none;
+  border: 1.5px solid var(--accent);
+  transition: transform .15s, background .2s, color .2s, box-shadow .2s;
+}
+.btn-fill { background: var(--accent); color: #fff; }
+.btn-outline { background: transparent; color: var(--accent); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26,63,163,.18); }
+.btn-outline:hover { background: var(--accent-bg); }
+.btn:active { transform: translateY(0); }
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  font-size: 15px;
+  font-weight: 600;
+}
+.btn-ghost:hover { color: var(--sub); border-color: var(--muted); box-shadow: none; }
+
+/* Hero right: 能力三卡 */
+.capability-box {
+  border: 1.5px solid var(--accent);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+}
+.cap-item {
+  flex: 1;
+  border: 1.5px solid var(--card-bd);
+  border-radius: 8px;
+  padding: 18px 22px;
+  transition: border-color .2s, transform .2s;
+}
+.cap-item:hover { border-color: var(--accent-mid); transform: translateX(3px); }
+.cap-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--label);
+  letter-spacing: .05em;
+}
+.cap-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--accent);
+  margin: 2px 0 6px;
+}
+.cap-desc {
+  font-size: 15px;
+  color: var(--sub);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+/* ── Section heads ── */
+.block { margin-bottom: 120px; }
+.block-last { margin-bottom: 96px; }
+.sec-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--label);
+  letter-spacing: .04em;
+}
+.sec-title {
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -.01em;
+  line-height: 1.25;
+  margin: 8px 0 16px;
+}
+.sec-lead {
+  font-size: 17px;
+  color: var(--sub);
+  line-height: 1.85;
+  margin-bottom: 56px;
+}
+.sec-lead.tight { margin-bottom: 28px; }
+
+/* ── Projects timeline ── */
+.track { position: relative; }
+.track::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 12px;
+  bottom: 60px;
+  width: 2px;
+  background: var(--accent);
+  opacity: .85;
+}
+.proj {
+  position: relative;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: start;
+  margin-bottom: 44px;
+}
+.proj:last-child { margin-bottom: 0; }
+.proj-rail {
+  position: relative;
+  align-self: stretch;
+  min-height: 170px;
+}
+.node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  z-index: 1;
+}
+.node::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform .35s ease;
+}
+.proj.in .node::after { transform: scale(1); }
+.rail-arrow {
+  position: absolute;
+  left: 30px;
+  top: 11px;
+  right: -2px;
+  height: 2px;
+  background: var(--accent);
+}
+.rail-arrow::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -6px;
+  border-left: 10px solid var(--accent);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+.chapter {
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 18px;
+  white-space: nowrap;
+}
+
+.proj-card {
+  position: relative;
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  padding: 20px 28px 24px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  transition: box-shadow .25s, transform .25s;
+}
+.proj-card:hover {
+  box-shadow: 0 10px 28px rgba(26,63,163,.12);
+  transform: translateY(-2px);
+}
+.proj-main { padding-right: 28px; }
+.proj-no {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--label);
+  letter-spacing: .05em;
+}
+.proj-title {
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.35;
+  margin: 22px 0 4px;
+}
+.proj-sub {
+  font-size: 15px;
+  color: var(--sub);
+  margin-bottom: 20px;
+}
+.tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.cbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1.5px solid var(--accent);
+  transition: transform .15s, background .2s, color .2s;
+}
+.cbtn:hover { transform: translateY(-1px); }
+.cbtn-fill { background: var(--accent); color: #fff; }
+.cbtn-outline { background: transparent; color: var(--accent); }
+.cbtn-outline:hover { background: var(--accent-bg); }
+.cbtn-ghost { border-color: var(--border); color: var(--muted); background: transparent; }
+.cbtn-ghost:hover { border-color: var(--muted); color: var(--sub); }
+
+.proj-points {
+  border-left: 2px solid var(--accent);
+  padding-left: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  font-size: 15px;
+  color: var(--sub);
+  line-height: 1.7;
+}
+.proj-points li { list-style: none; position: relative; padding-left: 18px; }
+.proj-points li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ── Research box ── */
+.research-box {
+  display: flex;
+  gap: 56px;
+  align-items: stretch;
+  background: color-mix(in srgb, var(--surface) 40%, transparent);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+.rb-left {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+.rb-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--sub);
+}
+.rb-points {
+  flex: 1;
+  list-style: none;
+  border-left: 2px solid var(--border);
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.rb-points li { position: relative; padding-left: 16px; }
+.rb-points li::before { content: "—"; position: absolute; left: 0; }
+
+/* ── Contact + back-to-top ── */
+.contact-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.email-pill {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 11px 28px;
+  transition: color .2s, border-color .2s;
+}
+.email-pill:hover { color: var(--sub); border-color: var(--muted); }
+.top-btn {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: color .2s, border-color .2s, transform .15s;
+}
+.top-btn:hover { color: var(--sub); border-color: var(--muted); transform: translateY(-2px); }
+.top-btn span::before { content: "↑"; display: block; font-size: 16px; line-height: 1; margin-bottom: 2px; }
+
+/* ── Reveal on scroll (only when JS is on) ── */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* ── Responsive ── */
+@media (max-width: 1000px) {
+  .page { padding: 0 24px 48px; }
+  .hero { grid-template-columns: 1fr; gap: 48px; padding: 104px 0 56px; min-height: auto; }
+  .hero-title { font-size: 64px; }
+  .proj { grid-template-columns: 1fr; }
+  .proj-rail { min-height: 0; height: 48px; }
+  .proj-card { grid-template-columns: 1fr; }
+  .proj-main { padding-right: 0; }
+  .proj-points { border-left: none; border-top: 1px solid var(--border); padding: 16px 0 0; margin-top: 16px; }
+  .research-box { flex-direction: column; gap: 20px; }
+  .rb-points { border-left: none; border-top: 1px solid var(--border); padding: 16px 0 0; }
+}
+@media (max-width: 640px) {
+  .page { padding: 0 18px 40px; }
+  .nav-inner { padding: 10px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-link { text-align: center; padding: 6px 10px; font-size: 13px; }
+  .name-zh { font-size: 30px; letter-spacing: .24em; }
+  .hero-title { font-size: 46px; }
+  .sec-title { font-size: 28px; }
+  .sec-lead { font-size: 15px; margin-bottom: 40px; }
+  .block { margin-bottom: 88px; }
+  .track::before { left: 11px; top: 12px; }
+  .proj-rail { height: auto; min-height: 0; }
+  .rail-arrow { display: none; }
+  .chapter { position: static; margin: 0 0 14px 36px; display: inline-block; }
+  .proj { display: block; }
+  .proj-card { margin-left: 36px; padding: 20px 18px; }
+  .proj-title { font-size: 19px; }
+  .proj-card:hover { transform: none; }
+  .contact-row { justify-content: center; text-align: center; }
+  .top-btn { margin: 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; }
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<nav class="nav" aria-label="页面导航">
+  <div class="nav-inner">
+    <a href="#about" class="nav-link" data-target="about" id="nav-about">关于我</a>
+    <a href="#projects" class="nav-link" data-target="projects">项目作品</a>
+    <a href="#research" class="nav-link" data-target="research">其他研究</a>
+    <a href="#contact" class="nav-link" data-target="contact">与我联系</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- ── 第一屏：关于我 ── -->
+  <section id="about" class="hero">
+    <div class="hero-left reveal">
+      <span class="pill-tag">2026 PORTFOLIO</span>
+      <div class="name-row">
+        <span class="name-zh">朱嘉</span>
+        <span class="name-divider"></span>
+        <span class="name-role">城市规划设计师转型</span>
+      </div>
+      <h1 class="hero-title">AI产品经理</h1>
+      <p class="hero-bio">
+        7年ToG规划设计经验，2025年起转型AI产品，独立完成垂类Agent与LLM应用的0-1构建。<br>
+        现在做的事：<strong>把规划师查规范、写策划书这些又重复又耗时的活，做成真能用的 AI 产品，并用数据验证它到底有没有用。</strong>
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-fill">查看项目</a>
+        <a href="https://docs.qq.com/pdf/DTnpEZ29EandVd05n" target="_blank" rel="noopener" class="btn btn-outline">查看简历</a>
+      </div>
+    </div>
+
+    <div class="capability-box reveal">
+      <div class="cap-item">
+        <div class="cap-num">01</div>
+        <div class="cap-title">能做AI产品</div>
+        <div class="cap-desc">需求定义、模型盲测选型、工程实现、迭代复盘，产出可访问的线上产品。</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-num">02</div>
+        <div class="cap-title">能验证AI产品</div>
+        <div class="cap-desc">自建评测集与评测体系，用对照实验定位问题、修正判断；关键决策由评测数据支撑。</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-num">03</div>
+        <div class="cap-title">懂垂直业务</div>
+        <div class="cap-desc">政府客户复杂需求拆解与多方协调；设计院数字化产品4年深度用户，参与100+项目流程。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 项目作品 ── -->
+  <section id="projects" class="block">
+    <div class="reveal">
+      <div class="sec-eyebrow">项目作品 / PROJECTS</div>
+      <h2 class="sec-title">3个AI产品实践项目</h2>
+      <p class="sec-lead">从作为业务用户使用院内 AI 产品，到自己搭原型和 Agent，再到用真实数据检验自己的判断——三个项目是这条路径上的三站。</p>
+    </div>
+
+    <div class="track">
+
+      <!-- 01 -->
+      <div class="proj reveal">
+        <div class="proj-rail">
+          <span class="node"></span>
+          <span class="rail-arrow"></span>
+          <span class="chapter">怎么算答对</span>
+        </div>
+        <article class="proj-card">
+          <div class="proj-main">
+            <div class="proj-no">01</div>
+            <div class="proj-title">规划业务场景AI原型</div>
+            <div class="proj-sub">半年前的判断，九轮对照评测后被自己推翻</div>
+            <div class="tags">
+              <a href="https://pigyhousey.github.io/portfolio/prototypes-for-planning-document.html" target="_blank" rel="noopener" class="cbtn cbtn-fill">产品复盘</a>
+              <a href="https://udify.app/chat/BjibDyqVUoK3C55A" target="_blank" rel="noopener" class="cbtn cbtn-outline">原型体验</a>
+              <a href="https://docs.qq.com/pdf/DTnFqV21LR1pJb1hJ" target="_blank" rel="noopener" class="cbtn cbtn-ghost">完整文档</a>
+            </div>
+          </div>
+          <ul class="proj-points">
+            <li>按规划"法律＞行政法规＞地方导则"自建"依据层级恰当"维度</li>
+            <li>问答对在条文类零贡献、表格类 50%→100%，据此界定适用边界</li>
+            <li>发现路由准确率 100% 实为 bug，修复后准确性 67.5%→95%</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- 02 -->
+      <div class="proj reveal">
+        <div class="proj-rail">
+          <span class="node"></span>
+          <span class="rail-arrow"></span>
+          <span class="chapter">落地要付什么代价</span>
+        </div>
+        <article class="proj-card">
+          <div class="proj-main">
+            <div class="proj-no">02</div>
+            <div class="proj-title">规划项目策划书Agent</div>
+            <div class="proj-sub">3个关键取舍如何选的，实施后修正了哪些判断</div>
+            <div class="tags">
+              <a href="https://pigyhousey.github.io/portfolio/proposal-agent-document.html" target="_blank" rel="noopener" class="cbtn cbtn-fill">产品复盘</a>
+              <a href="https://pigyhousey.github.io/portfolio/proposal-agent.html" target="_blank" rel="noopener" class="cbtn cbtn-outline">产品体验</a>
+              <a href="https://docs.qq.com/pdf/DTkRoV3ppbUpaWnBB" target="_blank" rel="noopener" class="cbtn cbtn-ghost">完整文档</a>
+            </div>
+          </div>
+          <ul class="proj-points">
+            <li>人工确认与追问设置：以"对结果影响"和"返工成本"为准</li>
+            <li>可用性优于效果上限：让模型负责内容、让代码负责结构</li>
+            <li>次生问题集中出现在模型执行环节，难以预估需在实施中动态校准</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- 03 -->
+      <div class="proj reveal">
+        <div class="proj-rail">
+          <span class="node"></span>
+          <span class="rail-arrow"></span>
+          <span class="chapter">到底有没有用</span>
+        </div>
+        <article class="proj-card">
+          <div class="proj-main">
+            <div class="proj-no">03</div>
+            <div class="proj-title">JobMate求职辅助决策助手</div>
+            <div class="proj-sub">上线三个月后用真实数据发现核心指标不成立</div>
+            <div class="tags">
+              <a href="https://pigyhousey.github.io/portfolio/jobmate-document.html" target="_blank" rel="noopener" class="cbtn cbtn-fill">产品复盘</a>
+              <a href="https://www.jobmate-better-match.com" target="_blank" rel="noopener" class="cbtn cbtn-outline">产品体验</a>
+              <a href="https://docs.qq.com/pdf/DTmFTRE1tRGxsbmVR" target="_blank" rel="noopener" class="cbtn cbtn-ghost">完整文档</a>
+            </div>
+          </div>
+          <ul class="proj-points">
+            <li>230+条数据证明原匹配度指标与结果无关联且存在系统性上浮</li>
+            <li>匹配度评分无预测力，真正的卡点是机械筛选门槛</li>
+            <li>效果评估要分两层：输出质量好不好、输出对决策有没有用</li>
+          </ul>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 其他研究 ── -->
+  <section id="research" class="block">
+    <div class="reveal">
+      <div class="sec-eyebrow">其他研究 / OTHERS</div>
+      <h2 class="sec-title">院内AIGC生图工具研究</h2>
+      <p class="sec-lead tight">作为业务用户，用对照实验方法研究院内 AIGC 生图工具的能力边界与设计逻辑，产出研究记录。</p>
+      <div class="research-box">
+        <div class="rb-left">
+          <div class="rb-name">IdeaMate对照实验研究</div>
+          <a href="https://docs.qq.com/pdf/DTmNsaGRiQUxmUm5o" target="_blank" rel="noopener" class="cbtn cbtn-ghost">查看研究文档</a>
+        </div>
+        <ul class="rb-points">
+          <li>现象观察→假设设计→控制变量→跨组对比→主动反证</li>
+          <li>典型对照实验包含创意设计与精准出图两种模式的差异、局部修改的归因纠错等</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 与我联系 ── -->
+  <section id="contact" class="block-last" style="margin-bottom:0">
+    <div class="reveal">
+      <div class="sec-eyebrow">与我联系 / CONTACT ME</div>
+      <h2 class="sec-title">正在寻找AI产品经理机会</h2>
+      <p class="sec-lead tight">目标方向：垂直行业 / ToG 智慧城市 等AI产品｜杭州，可考虑其他城市</p>
+      <div class="contact-row">
+        <a href="mailto:1035954428@qq.com" class="email-pill">邮箱：1035954428@qq.com</a>
+        <button type="button" class="top-btn" id="back-top" aria-label="返回顶部"><span>返回<br>顶部</span></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 关于我：让第一屏在视口中居中
+  var about = document.getElementById('about');
+  document.getElementById('nav-about').addEventListener('click', function (e) {
+    e.preventDefault();
+    var r = about.getBoundingClientRect();
+    var top = window.scrollY + r.top + r.height / 2 - window.innerHeight / 2;
+    window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  // 返回顶部
+  document.getElementById('back-top').addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  // 导航高亮：点击后锁定到目标板块，用户自己滚动后再恢复按位置判断
+  var links = document.querySelectorAll('.nav-link');
+  var ids = ['about', 'projects', 'research', 'contact'];
+  var sections = ids.map(function (id) { return document.getElementById(id); });
+  var locked = null;
+  function setActive(id) {
+    links.forEach(function (l) { l.classList.toggle('is-active', l.dataset.target === id); });
+  }
+  function updateActive() {
+    if (locked) return;
+    var current = ids[0];
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    if (atBottom && sections[3].getBoundingClientRect().top <= window.innerHeight * 0.9) {
+      current = 'contact';
+    } else {
+      var line = window.innerHeight * 0.4;
+      sections.forEach(function (s, i) {
+        if (s.getBoundingClientRect().top <= line) current = ids[i];
+      });
+    }
+    setActive(current);
+  }
+  links.forEach(function (l) {
+    l.addEventListener('click', function () {
+      locked = l.dataset.target;
+      setActive(locked);
+    });
+  });
+  ['wheel', 'touchmove', 'keydown', 'pointerdown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { locked = null; }, { passive: true });
+  });
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { updateActive(); ticking = false; });
+  }, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
+
+  // 入场渐显
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+})();
+</script>
+</body>
+</html>
